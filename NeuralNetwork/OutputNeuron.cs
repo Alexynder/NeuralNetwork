@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace NeuralNetwork
 {
-    class OutputNeuron:SideLayerNeuron
+    class OutputNeuron : SideLayerNeuron, INeuronCountable
     {
-
+        public void CountValue()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
