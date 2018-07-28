@@ -10,6 +10,12 @@ namespace NeuralNetwork
     {
         private Weight[] inWeights;
         private Weight[] outWeights;
+        /// <summary>
+        /// Indexer to get values from 2 arrays in way like this: hiden["in",3].value...
+        /// </summary>
+        /// <param name="dir">string index to achieve in-array or out-array, use "in" or "out" values</param>
+        /// <param name="index">basic index of array</param>
+        /// <returns></returns>
         public Weight this[string dir, int index]
         {
             get
