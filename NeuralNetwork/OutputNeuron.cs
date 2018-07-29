@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NeuralNetwork
 {
-    class OutputNeuron : SideLayerNeuron, INeuronCountable
+    class OutputNeuron : SideLayerNeuon, INeuronCountable
     {
         public void CountValue()
         {
