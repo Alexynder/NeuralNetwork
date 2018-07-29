@@ -8,6 +8,15 @@ namespace NeuralNetwork
 {
     public class NeuralNetwork
     {
+        public double[] Output { get
+            {
+                double[] result = new double[layers[layers.Length-1].NeuronCount];
+                for (int i = 0; i < layers[layers.Length - 1].NeuronCount; i++)
+                    result[i] = layers[layers.Length - 1].Neurons[i].Value;
+                return result;
+            }
+        }
+        public NeuralDataSet DataSet { get; set; }
         Layer[] layers;
         /// <summary>
         /// Basic initialising neural network, before initialising fully use Initialise() method
@@ -108,6 +117,46 @@ namespace NeuralNetwork
                     layers[0].Neurons[i].Value = input[i];
                 }
             }
+        }
+        public void NormaliseInputSigmoid()
+        {
+            foreach (InputNeuron n in layers[0].Neurons)
+                n.NormalizeSigmod();
+        }
+        public void NormaliseInputHyperbola()
+        {
+            foreach (InputNeuron n in layers[0].Neurons)
+                n.NormalizeHyperbola();
+        }
+        public void PoolInputsToOutputSigmoid()
+        {
+            for(int i=1;i<layers.Length;i++)
+            {
+                foreach(INeuronCountable n in layers[i].Neurons)
+                {
+                    n.CountValueSigmoid();
+                }
+            }
+        }
+        public void PoolInputsToOutputHyperbola()
+        {
+            for (int i = 1; i < layers.Length; i++)
+            {
+                foreach (INeuronCountable n in layers[i].Neurons)
+                {
+                    n.CountValueHyperbola();
+                }
+            }
+        }
+        public double CountMSE(int iteration)
+        {
+            double result = 0;
+            for (int i=0;i<Output.Length;i++)
+            {
+                result += Math.Pow(DataSet.ExpectedResult[iteration][i] - Output[i],2);
+            }
+            result = result / Output.Length;
+            return result;
         }
     }
 }
