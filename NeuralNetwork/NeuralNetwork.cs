@@ -20,7 +20,7 @@ namespace NeuralNetwork
             layers = new Layer[hidenLayersNeuronCount.Length + 2]; //+input and output layer
             layers[0] = new Layer(inputCount);
             layers[layers.Length - 1] = new Layer(outputCount);
-            for (int i=1; i<layers.Length-2;i++)
+            for (int i=1; i<layers.Length-1;i++)
             {
                 layers[i] = new Layer(hidenLayersNeuronCount[i - 1]);
             }
@@ -59,7 +59,7 @@ namespace NeuralNetwork
                     //output weights adjustment, output weight created in HidenNeuron constructor
                     for (int k = 0; k < ((HidenNeuron)layers[i][j]).OutWeightsCount; k++)
                     {                        
-                        (layers[i][j] as HidenNeuron)["out", k].Output = layers[i+1][j];
+                        (layers[i][j] as HidenNeuron)["out", k].Output = layers[i+1][k];
                     }
                 }
             }
@@ -70,6 +70,7 @@ namespace NeuralNetwork
                 for (int j = 0; j < ((OutputNeuron)layers[layers.Length - 1][i]).WeightCount; j++)
                 {
                     (layers[layers.Length - 1][i] as OutputNeuron)[j] = (layers[layers.Length - 2][i] as HidenNeuron)["out",j];
+                    (layers[layers.Length - 1][i] as OutputNeuron)[j].Output = layers[layers.Length - 1][i];
                 }
             }
         }
