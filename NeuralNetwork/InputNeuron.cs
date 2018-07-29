@@ -12,7 +12,7 @@ namespace NeuralNetwork
         {
             for (int i=0;i<WeightCount;i++)
             {
-                this[i] = new Weight
+                this.Weights[i] = new Weight
                 {
                     Input = this
                 };

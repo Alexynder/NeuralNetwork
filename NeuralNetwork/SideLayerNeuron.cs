@@ -7,23 +7,14 @@ using System.Threading.Tasks;
 
 namespace NeuralNetwork
 {
-    abstract class SideLayerNeuron:BasicNeuron,IEnumerable
+    abstract class SideLayerNeuron:BasicNeuron
     {
-        public int WeightCount { get { return weights.Length; } }
+        public int WeightCount { get { return Weights.Length; } }
         public SideLayerNeuron(int nextLayerNeuronCount)
         {
-            weights = new Weight[nextLayerNeuronCount];
+            Weights = new Weight[nextLayerNeuronCount];
         }
-        Weight[] weights;
-        public Weight this[int index]
-        {
-            get { return weights[index]; }
-            set { weights[index] = value; }
-        }
+        public Weight[] Weights { get; set; }
 
-        public IEnumerator GetEnumerator()
-        {
-            return weights.GetEnumerator();
-        }
     }
 }

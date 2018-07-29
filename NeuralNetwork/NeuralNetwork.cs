@@ -30,10 +30,11 @@ namespace NeuralNetwork
             //Creating neurons in input layer, creating weights for them and saving ref in weghts for this and next layer.
             for (int i=0; i<layers[0].NeuronCount;i++)
             {
-                layers[0][i] = new InputNeuron(layers[1].NeuronCount);
-                for (int j=0;j<((InputNeuron)layers[0][i]).WeightCount;j++)
+                layers[0].Neurons[i] = new InputNeuron(layers[1].NeuronCount);
+                for (int j=0;j<((InputNeuron)layers[0].Neurons[i]).WeightCount;j++)
                 {
-                    (layers[0][i] as InputNeuron)[j].Output = layers[1][j];
+                    (layers[0].Neurons[i] as InputNeuron).Weights[i].Output = layers[1].Neurons[j];
+                    (layers[0].Neurons[i] as InputNeuron).Value = i;
                 }
             }
             //creating neurons in hiden layer and making seting ref to weight for prev layer, and creating new weight for next layer.
@@ -41,36 +42,38 @@ namespace NeuralNetwork
             {
                 for (int j=0; j<layers[i].NeuronCount;j++)
                 {
-                    layers[i][j] = new HidenNeuron(layers[i-1].NeuronCount,layers[i+1].NeuronCount);
+                    layers[i].Neurons[j] = new HidenNeuron(layers[i-1].NeuronCount,layers[i+1].NeuronCount);
                     //input weights adjustment, input weight created in previos layer neuron constructor
-                    for (int k = 0; k < ((HidenNeuron)layers[i][j]).InWeightsCount; k++)
+                    for (int k = 0; k < ((HidenNeuron)layers[i].Neurons[j]).InWeightsCount; k++)
                     {
-                        if (layers[i-1][j] as InputNeuron!=null)
+                        if (layers[i-1].Neurons[j] as InputNeuron!=null)
                         {
-                            (layers[i][j] as HidenNeuron)["in", k] = (layers[i - 1][j] as InputNeuron)[k];
-                            (layers[i][j] as HidenNeuron)["in", k].Output = layers[i][j];
+                            (layers[i].Neurons[j] as HidenNeuron).InWeights[k] = (layers[i - 1].Neurons[j] as InputNeuron).Weights[k];
+                            (layers[i].Neurons[j] as HidenNeuron).InWeights[k].Output = layers[i].Neurons[j];
                         }
                         else
                         {
-                            (layers[i][j] as HidenNeuron)["in", k] = (layers[i - 1][j] as HidenNeuron)["out",k];
-                            (layers[i][j] as HidenNeuron)["in", k].Output = layers[i][j];
+                            (layers[i].Neurons[j] as HidenNeuron).InWeights[k] = (layers[i - 1].Neurons[j] as HidenNeuron).OutWeights[k];
+                            (layers[i].Neurons[j] as HidenNeuron).InWeights[k].Output = layers[i].Neurons[j];
                         }
                     }
                     //output weights adjustment, output weight created in HidenNeuron constructor
-                    for (int k = 0; k < ((HidenNeuron)layers[i][j]).OutWeightsCount; k++)
+                    for (int k = 0; k < ((HidenNeuron)layers[i].Neurons[j]).OutWeightsCount; k++)
                     {                        
-                        (layers[i][j] as HidenNeuron)["out", k].Output = layers[i+1][k];
+                        (layers[i].Neurons[j] as HidenNeuron).OutWeights[k].Output = layers[i+1].Neurons[k];
                     }
                 }
             }
             // initialising last layer
             for (int i = 0; i < layers[layers.Length-1].NeuronCount; i++)
             {
-                layers[layers.Length - 1][i] = new OutputNeuron(layers[layers.Length-2].NeuronCount);
-                for (int j = 0; j < ((OutputNeuron)layers[layers.Length - 1][i]).WeightCount; j++)
+                layers[layers.Length - 1].Neurons[i] = new OutputNeuron(layers[layers.Length-2].NeuronCount);
+                for (int j = 0; j < ((OutputNeuron)layers[layers.Length - 1].Neurons[i]).WeightCount; j++)
                 {
-                    (layers[layers.Length - 1][i] as OutputNeuron)[j] = (layers[layers.Length - 2][i] as HidenNeuron)["out",j];
-                    (layers[layers.Length - 1][i] as OutputNeuron)[j].Output = layers[layers.Length - 1][i];
+                    (layers[layers.Length - 1].Neurons[i] as OutputNeuron).Weights[j] = 
+                        (layers[layers.Length - 2].Neurons[i] as HidenNeuron).OutWeights[j];
+                    (layers[layers.Length - 1].Neurons[i] as OutputNeuron).Weights[j].Output = 
+                        layers[layers.Length - 1].Neurons[i];
                 }
             }
         }

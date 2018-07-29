@@ -14,6 +14,7 @@ namespace NeuroLibTestInit
         {
             NeuralNetwork.NeuralNetwork neuralNetwork = new NeuralNetwork.NeuralNetwork(new int[] { 2, 2 }, 2, 2);
             neuralNetwork.Initialise();
+            
 
             Console.WriteLine("Initialising successful!");
 
