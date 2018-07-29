@@ -95,5 +95,19 @@ namespace NeuralNetwork
                 }
             }
         }
+        public void SetInputValues(double[] input)
+        {
+            if (input.Length!=layers[0].NeuronCount)
+            {
+                throw new IndexOutOfRangeException("Input neurons count is not the same as data input count.");
+            }
+            else
+            {
+                for (int i=0;i<input.Length;i++)
+                {
+                    layers[0].Neurons[i].Value = input[i];
+                }
+            }
+        }
     }
 }
