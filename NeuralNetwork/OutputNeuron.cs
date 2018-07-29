@@ -8,6 +8,9 @@ namespace NeuralNetwork
 {
     class OutputNeuron : SideLayerNeuron, INeuronCountable
     {
+        public OutputNeuron(int PrevLayerNeuronCount):base(PrevLayerNeuronCount)
+        {
+        }
         public void CountValue()
         {
             throw new NotImplementedException();

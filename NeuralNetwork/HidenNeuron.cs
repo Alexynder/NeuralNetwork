@@ -8,6 +8,17 @@ namespace NeuralNetwork
 {
     class HidenNeuron : BasicNeuron, INeuronCountable
     {
+        public HidenNeuron (int inWeightsCount, int outWeightsCount)
+        {
+            inWeights = new Weight[inWeightsCount];
+            outWeights = new Weight[outWeightsCount];
+            for (int i=0;i<outWeightsCount;i++)
+            {
+                outWeights[i] = new Weight() { Input = this };
+            }
+        }
+        public int InWeightsCount { get{ return inWeights.Length; } }
+        public int OutWeightsCount { get { return outWeights.Length; } }
         private Weight[] inWeights;
         private Weight[] outWeights;
         /// <summary>

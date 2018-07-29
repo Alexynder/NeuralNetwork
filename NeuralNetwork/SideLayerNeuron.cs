@@ -9,6 +9,11 @@ namespace NeuralNetwork
 {
     abstract class SideLayerNeuron:BasicNeuron,IEnumerable
     {
+        public int WeightCount { get { return weights.Length; } }
+        public SideLayerNeuron(int nextLayerNeuronCount)
+        {
+            weights = new Weight[nextLayerNeuronCount];
+        }
         Weight[] weights;
         public Weight this[int index]
         {

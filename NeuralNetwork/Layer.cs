@@ -9,8 +9,8 @@ namespace NeuralNetwork
 {
     class Layer:IEnumerable
     {
-        BasicNeuron[] neurons;
-
+        private BasicNeuron[] neurons;
+        public int NeuronCount { get { return neurons.Count(); } }
         public Layer(int neuronCount)
         {
             neurons = new BasicNeuron[neuronCount];
