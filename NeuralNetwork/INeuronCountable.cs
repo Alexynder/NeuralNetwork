@@ -12,6 +12,7 @@ namespace NeuralNetwork
     /// </summary>
     interface INeuronCountable
     {
-        void CountValue();
+        void CountValueSigmoid();
+        void CountValueHyperbola();
     }
 }

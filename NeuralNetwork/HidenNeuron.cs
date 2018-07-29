@@ -20,10 +20,28 @@ namespace NeuralNetwork
         public int InWeightsCount { get{ return InWeights.Length; } }
         public int OutWeightsCount { get { return OutWeights.Length; } }
         public Weight[] InWeights { get; set; }
-        public Weight[] OutWeights { get; set; }        
+        public Weight[] OutWeights { get; set; }
+
         public void CountValue()
         {
-            throw new NotImplementedException();
+            Double sum = 0;
+            foreach (Weight w in InWeights)
+            {
+                sum += w.Value * w.Input.Value;
+            }
+            Value = sum;
+        }
+
+        public void CountValueHyperbola()
+        {
+            CountValue();
+            NormalizeHyperbola();
+        }
+
+        public void CountValueSigmoid()
+        {
+            CountValue();
+            NormalizeSigmod();
         }
     }
 }

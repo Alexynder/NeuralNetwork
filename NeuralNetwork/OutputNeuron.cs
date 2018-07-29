@@ -13,7 +13,24 @@ namespace NeuralNetwork
         }
         public void CountValue()
         {
-            throw new NotImplementedException();
+            Double sum = 0;
+            foreach (Weight w in Weights)
+            {
+                sum += w.Value * w.Input.Value;
+            }
+            Value = sum;
+        }
+
+        public void CountValueHyperbola()
+        {
+            CountValue();
+            NormalizeHyperbola();
+        }
+
+        public void CountValueSigmoid()
+        {
+            CountValue();
+            NormalizeSigmod();
         }
     }
 }
