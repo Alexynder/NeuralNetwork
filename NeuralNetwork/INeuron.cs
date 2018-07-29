@@ -10,5 +10,7 @@ namespace NeuralNetwork
     {
         void NormalizeSigmod();
         void NormalizeHyperbola();
+        double DerivedNormalizeSigmod(double x);
+        double DerivedNormalizeHyperbola(double x);
     }
 }
