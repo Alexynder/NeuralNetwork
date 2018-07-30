@@ -8,6 +8,8 @@ namespace NeuralNetwork
 {
     public class NeuralNetwork
     {
+        public double StudySpeed = 0.1;
+        public Double studyMoment = 0.1;
         public double[] Output { get
             {
                 double[] result = new double[layers[layers.Length-1].NeuronCount];
@@ -157,6 +159,86 @@ namespace NeuralNetwork
             }
             result = result / Output.Length;
             return result;
+        }
+        private void ChangeWeights()
+        {
+            for (int i = 0; i < layers[0].NeuronCount; i++)
+            {
+                foreach (Weight w in (layers[0].Neurons[i] as InputNeuron).Weights)
+                {
+                    w.CountDelta(StudySpeed, studyMoment);
+                    w.ChangeWeight();
+                }
+            }
+            for (int i = 1; i < layers.Length - 1; i++)
+            {
+                for (int j = 0; j < layers[i].NeuronCount; j++)
+                    foreach (Weight w in (layers[i].Neurons[j] as HidenNeuron).OutWeights)
+                    {
+                        w.CountDelta(StudySpeed, studyMoment);
+                        w.ChangeWeight();
+                    }
+            }
+        }
+        private void PushErrorBackSigmoid()
+        {
+            foreach (OutputNeuron n in layers[layers.Length - 1].Neurons)
+            {
+                n.CountDeltaSigmoid();
+            }
+            for (int i = 1; i < layers.Length - 1; i++)
+            {
+                foreach (HidenNeuron n in layers[i].Neurons)
+                {
+                    n.CountDeltaSigmoid();
+                }
+            }
+            ChangeWeights();
+        }
+        private void PushErrorBackHyperbola()
+        {
+            foreach (OutputNeuron n in layers[layers.Length - 1].Neurons)
+            {
+                n.CountDeltaHyperbola();
+            }
+            for (int i = 1; i < layers.Length - 1; i++)
+            {
+                foreach (HidenNeuron n in layers[i].Neurons)
+                {
+                    n.CountDeltaHyperbola();
+                }
+            }
+            ChangeWeights();
+        }
+        public void setIdealResultToOutput(double[] idealResult)
+        {
+            for(int i=0;i<idealResult.Length;i++)
+            {
+                (layers[layers.Length - 1].Neurons[i] as OutputNeuron).idealResult = idealResult[i];
+            }
+        }
+        public  void SetDataSet(NeuralDataSet data)
+        {
+            this.DataSet = data;
+        }
+        public string Study(int epochCount)
+        {
+            string log = "";
+            for (int i=0;i<epochCount;i++)
+            {
+                for (int iteration=0; iteration<DataSet.Inputs.Length;iteration++)
+                {
+                    SetInputValues(DataSet.Inputs[iteration]);
+                    setIdealResultToOutput(DataSet.ExpectedResult[iteration]);
+                    PoolInputsToOutputSigmoid();
+                    if (i%100==0)
+                        log += String.Format("{0},",CountMSE(iteration));
+                    PushErrorBackSigmoid();
+                }
+                if (i % 100 == 0)
+                    log += "\n";
+            }
+            return log;
         }
     }
 }

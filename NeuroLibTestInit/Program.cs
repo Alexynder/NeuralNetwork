@@ -34,14 +34,34 @@ namespace NeuroLibTestInit
             DateTime time = DateTime.Now;
             neuralNetwork.Initialise();
             neuralNetwork.RandomiseWeights();
-            double[] inp={ 1,0};
-            neuralNetwork.SetInputValues(inp);
-            neuralNetwork.PoolInputsToOutputSigmoid();
+            neuralNetwork.SetDataSet(dataForLearning);
+
+            TestNN(neuralNetwork);
+            Console.ReadKey();
+            string log = neuralNetwork.Study(100000);
             TimeSpan dif = DateTime.Now - time;
 
-            Console.WriteLine("Initialising successful!, time spent: {0}",dif.ToString());
-            Console.WriteLine("Result from first run: {0}",neuralNetwork.Output[0]);
+            Console.WriteLine("Initialising and studiing for 20 epoches succesful, time spent: {0}", dif.ToString());
+            Console.WriteLine("Error list from first run: \n{0}", log);
+
+            TestNN(neuralNetwork);
             Console.ReadKey();
+        }
+
+        private static void TestNN(NeuralNetwork.NeuralNetwork neuralNetwork)
+        {
+            neuralNetwork.SetInputValues(new double[] { 0, 0 });
+            neuralNetwork.PoolInputsToOutputSigmoid();
+            Console.WriteLine("input 0,0. Result:{0}", neuralNetwork.Output[0]);
+            neuralNetwork.SetInputValues(new double[] { 0, 1 });
+            neuralNetwork.PoolInputsToOutputSigmoid();
+            Console.WriteLine("input 0,1. Result:{0}", neuralNetwork.Output[0]);
+            neuralNetwork.SetInputValues(new double[] { 1, 0 });
+            neuralNetwork.PoolInputsToOutputSigmoid();
+            Console.WriteLine("input 1,0. Result:{0}", neuralNetwork.Output[0]);
+            neuralNetwork.SetInputValues(new double[] { 1, 1 });
+            neuralNetwork.PoolInputsToOutputSigmoid();
+            Console.WriteLine("input 1,1. Result:{0}", neuralNetwork.Output[0]);
         }
     }
 }
