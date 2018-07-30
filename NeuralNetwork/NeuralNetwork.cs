@@ -8,8 +8,8 @@ namespace NeuralNetwork
 {
     public class NeuralNetwork
     {
-        public double StudySpeed = 0.1;
-        public Double studyMoment = 0.1;
+        public double StudySpeed = 0.5;
+        public Double studyMoment = 0.4;
         public double[] Output { get
             {
                 double[] result = new double[layers[layers.Length-1].NeuronCount];
@@ -231,9 +231,13 @@ namespace NeuralNetwork
                     SetInputValues(DataSet.Inputs[iteration]);
                     setIdealResultToOutput(DataSet.ExpectedResult[iteration]);
                     PoolInputsToOutputSigmoid();
-                    if (i%100==0)
-                        log += String.Format("{0},",CountMSE(iteration));
                     PushErrorBackSigmoid();
+                    /*if (i % 100 == 0)
+                    {
+                       // log += String.Format("  {0:0.00}, expcted data: {1} ,", CountMSE(iteration), DataSet.ExpectedResult[iteration][0]);
+                        log += String.Format("\ninput: {0},{1}. Result:{2:0.00}. Expected: {3} \n", layers[0].Neurons[0].Value, 
+                            layers[0].Neurons[1].Value, layers[2].Neurons[0].Value, (layers[2].Neurons[0] as OutputNeuron).idealResult);
+                    }*/
                 }
                 if (i % 100 == 0)
                     log += "\n";
