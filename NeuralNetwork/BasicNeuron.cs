@@ -18,8 +18,10 @@ namespace NeuralNetwork
 
         public double DerivedNormalizeHyperbola(double x)
         {
-            double ePow2x = Math.Pow(Math.E, 2 * x);
-            return -((2*(ePow2x-1)*ePow2x)/Math.Pow((ePow2x+1),2))+2*(ePow2x/(ePow2x+1));
+            /* double ePow2x = Math.Pow(Math.E, 2 * x);
+             return -((2*(ePow2x-1)*ePow2x)/Math.Pow((ePow2x+1),2))+2*(ePow2x/(ePow2x+1)); */
+            double chx = (Math.Pow(Math.E, x) + Math.Pow(Math.E, -x) )/ 2;
+            return 1/Math.Pow(chx,2);
         }
 
         public void NormalizeHyperbola()

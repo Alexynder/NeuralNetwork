@@ -9,7 +9,7 @@ namespace NeuralNetwork
     public class NeuralNetwork
     {
         public double StudySpeed = 0.5;
-        public Double studyMoment = 0.4;
+        public Double studyMoment = 0.6;
         public double[] Output { get
             {
                 double[] result = new double[layers[layers.Length-1].NeuronCount];
@@ -221,27 +221,51 @@ namespace NeuralNetwork
         {
             this.DataSet = data;
         }
-        public string Study(int epochCount)
+        private string Study(int epochCount,string normaliseFuncType)
         {
-            string log = "";
-            for (int i=0;i<epochCount;i++)
+            string log = "Epoch; 0 0; 0 1; 1 0; 1 1; \n";
+            for (int i = 0; i < epochCount; i++)
             {
-                for (int iteration=0; iteration<DataSet.Inputs.Length;iteration++)
+                if (i > 150 && i < 152)
                 {
+                    Console.WriteLine();
+                }
+                log += string.Format("{0} ;", i);
+                for (int iteration = 0; iteration < DataSet.Inputs.Length; iteration++)
+                {
+                    if (iteration == DataSet.Inputs.Length / 4 - 1 ||
+                        iteration == DataSet.Inputs.Length / 4 * 2 - 1 ||
+                        iteration == DataSet.Inputs.Length / 4 * 3 - 1 ||
+                        iteration == DataSet.Inputs.Length - 1)
+                    {
+                        log += string.Format(" {0:0.00000};", CountMSE(iteration));
+                    }
                     SetInputValues(DataSet.Inputs[iteration]);
                     setIdealResultToOutput(DataSet.ExpectedResult[iteration]);
-                    PoolInputsToOutputSigmoid();
-                    PushErrorBackSigmoid();
-                    /*if (i % 100 == 0)
+                    //TODO: add enum for this:
+                    if (normaliseFuncType.ToLower() == "sigmoid")
                     {
-                       // log += String.Format("  {0:0.00}, expcted data: {1} ,", CountMSE(iteration), DataSet.ExpectedResult[iteration][0]);
-                        log += String.Format("\ninput: {0},{1}. Result:{2:0.00}. Expected: {3} \n", layers[0].Neurons[0].Value, 
-                            layers[0].Neurons[1].Value, layers[2].Neurons[0].Value, (layers[2].Neurons[0] as OutputNeuron).idealResult);
-                    }*/
+                        PoolInputsToOutputSigmoid();
+                        PushErrorBackSigmoid();
+                    }
+                    else
+                    {
+                        PoolInputsToOutputHyperbola();
+                        PushErrorBackHyperbola();
+                    }
                 }
-                /*if (i % 100 == 0)
-                    //log += "\n";*/
+                log += "\n";
             }
+            return log;
+        }
+        public string StudyHyperbola(int epochCount)
+        {
+            string log = Study(epochCount, "hyperbola");
+            return log;
+        }
+        public string StudySigmoid(int epochCount)
+        {
+            string log = Study(epochCount, "sigmoid");
             return log;
         }
     }

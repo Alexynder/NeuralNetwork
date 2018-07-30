@@ -34,7 +34,7 @@ namespace NeuralNetwork
             double sum = 0;
             foreach (Weight w in OutWeights)
             {
-                sum += w.Value * (w.Output as OutputNeuron).Delta;
+                sum += w.Value * (w.Output as INeuronCountable).GetDelta;
             }
             Delta = sum * DerivedNormalizeHyperbola(Value);
         }
@@ -44,7 +44,7 @@ namespace NeuralNetwork
             double sum = 0;
             foreach (Weight w in OutWeights)
             {
-                sum += w.Value * w.Delta;
+                sum += w.Value * (w.Output as INeuronCountable).GetDelta;
             }
             Delta = sum * DerivedNormalizeSigmod(Value);
         }
