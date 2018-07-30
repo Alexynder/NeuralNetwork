@@ -239,8 +239,8 @@ namespace NeuralNetwork
                             layers[0].Neurons[1].Value, layers[2].Neurons[0].Value, (layers[2].Neurons[0] as OutputNeuron).idealResult);
                     }*/
                 }
-                if (i % 100 == 0)
-                    log += "\n";
+                /*if (i % 100 == 0)
+                    //log += "\n";*/
             }
             return log;
         }

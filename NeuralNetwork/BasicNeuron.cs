@@ -12,7 +12,8 @@ namespace NeuralNetwork
 
         public double DerivedNormalizeSigmod(double x)
         {
-            return (Math.Pow(Math.E, -x)) / (Math.Pow((1+Math.Pow(Math.E,-x)), 2));
+            return (1 - x) * x;
+            //return (Math.Pow(Math.E, -x)) / (Math.Pow((1+Math.Pow(Math.E,-x)), 2));
         }
 
         public double DerivedNormalizeHyperbola(double x)

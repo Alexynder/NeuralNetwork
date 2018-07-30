@@ -19,14 +19,16 @@ namespace NeuroLibTestInit
              *   X    O
              * O - O /
              * */
-            NeuralDataSet dataForLearning = CreateNewData(30);
-            NeuralNetwork.NeuralNetwork neuralNetwork = new NeuralNetwork.NeuralNetwork(new int[] { 2 }, 2, 1);
+            NeuralDataSet dataForLearning = CreateNewData(30);            
+            NeuralNetwork.NeuralNetwork neuralNetwork = new NeuralNetwork.NeuralNetwork(new int[] { 12,13,14,15 }, 2, 1);
             DateTime time = DateTime.Now;
             neuralNetwork.Initialise();
+            neuralNetwork.StudySpeed = 0.2;
+            neuralNetwork.studyMoment = 0.05;
             neuralNetwork.RandomiseWeights();
             neuralNetwork.SetDataSet(dataForLearning);
 
-            string log = neuralNetwork.Study(3000);
+            string log = neuralNetwork.Study(500);
 
 
 
@@ -43,16 +45,16 @@ namespace NeuroLibTestInit
         {
             neuralNetwork.SetInputValues(new double[] { 0, 0 });
             neuralNetwork.PoolInputsToOutputSigmoid();
-            Console.WriteLine("input 0,0. Result:{0:0.00}", neuralNetwork.Output[0]);
+            Console.WriteLine("input 0,0. Result:{0:0.}", neuralNetwork.Output[0]);
             neuralNetwork.SetInputValues(new double[] { 0, 1 });
             neuralNetwork.PoolInputsToOutputSigmoid();
-            Console.WriteLine("input 0,1. Result:{0:0.00}", neuralNetwork.Output[0]);
+            Console.WriteLine("input 0,1. Result:{0:0.}", neuralNetwork.Output[0]);
             neuralNetwork.SetInputValues(new double[] { 1, 0 });
             neuralNetwork.PoolInputsToOutputSigmoid();
-            Console.WriteLine("input 1,0. Result:{0:0.00}", neuralNetwork.Output[0]);
+            Console.WriteLine("input 1,0. Result:{0:0.}", neuralNetwork.Output[0]);
             neuralNetwork.SetInputValues(new double[] { 1, 1 });
             neuralNetwork.PoolInputsToOutputSigmoid();
-            Console.WriteLine("input 1,1. Result:{0:0.00}", neuralNetwork.Output[0]);
+            Console.WriteLine("input 1,1. Result:{0:0.}", neuralNetwork.Output[0]);
         }
         static NeuralDataSet CreateNewData(int repitTimes)
         {
@@ -60,10 +62,10 @@ namespace NeuroLibTestInit
             double[] do1 = new double[] { 0 };
 
             Double[] d2 = new double[] { 0, 1 };
-            double[] do2 = new double[] { 0 };
+            double[] do2 = new double[] { 1 };
 
             Double[] d3 = new double[] { 1, 0 };
-            double[] do3 = new double[] { 0 };
+            double[] do3 = new double[] { 1 };
 
             Double[] d4 = new double[] { 1, 1 };
             double[] do4 = new double[] { 1 };
