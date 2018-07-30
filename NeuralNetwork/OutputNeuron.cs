@@ -8,9 +8,29 @@ namespace NeuralNetwork
 {
     class OutputNeuron : SideLayerNeuron, INeuronCountable
     {
+        public double GetDelta
+        {
+            get
+            {
+                return Delta;
+            }
+        }
+        public Double idealResult { get; set; }
         public OutputNeuron(int PrevLayerNeuronCount):base(PrevLayerNeuronCount)
         {
         }
+        public Double Delta { get; set; }
+
+        public void CountDeltaHyperbola()
+        {
+            Delta = (idealResult - Value) * DerivedNormalizeHyperbola(Value);
+        }
+
+        public void CountDeltaSigmoid()
+        {
+            Delta = (idealResult - Value) * DerivedNormalizeSigmod(Value);
+        }
+
         public void CountValue()
         {
             Double sum = 0;

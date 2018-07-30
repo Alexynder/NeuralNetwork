@@ -12,7 +12,10 @@ namespace NeuralNetwork
     /// </summary>
     interface INeuronCountable
     {
+        Double GetDelta { get; }
         void CountValueSigmoid();
         void CountValueHyperbola();
+        void CountDeltaSigmoid();
+        void CountDeltaHyperbola();
     }
 }

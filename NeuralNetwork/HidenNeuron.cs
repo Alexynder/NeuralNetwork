@@ -8,6 +8,13 @@ namespace NeuralNetwork
 {
     class HidenNeuron : BasicNeuron, INeuronCountable
     {
+        public double GetDelta
+        {   get
+            {
+                return Delta;
+            }
+        }
+        public double Delta { get; set; }
         public HidenNeuron (int inWeightsCount, int outWeightsCount)
         {
             InWeights = new Weight[inWeightsCount];
@@ -20,7 +27,27 @@ namespace NeuralNetwork
         public int InWeightsCount { get{ return InWeights.Length; } }
         public int OutWeightsCount { get { return OutWeights.Length; } }
         public Weight[] InWeights { get; set; }
-        public Weight[] OutWeights { get; set; }
+        public Weight[] OutWeights { get; set; }        
+
+        public void CountDeltaHyperbola()
+        {
+            double sum = 0;
+            foreach (Weight w in OutWeights)
+            {
+                sum += w.Value * w.Delta;
+            }
+            Delta = sum * DerivedNormalizeHyperbola(Value);
+        }
+
+        public void CountDeltaSigmoid()
+        {
+            double sum = 0;
+            foreach (Weight w in OutWeights)
+            {
+                sum += w.Value * w.Delta;
+            }
+            Delta = sum * DerivedNormalizeSigmod(Value);
+        }
 
         public void CountValue()
         {

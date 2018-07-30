@@ -46,6 +46,7 @@
     <Compile Include="INeuronCountable.cs" />
     <Compile Include="InputNeuron.cs" />
     <Compile Include="Layer.cs" />
+    <Compile Include="NeuralDataSet.cs" />
     <Compile Include="NeuralNetwork.cs" />
     <Compile Include="OutputNeuron.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
