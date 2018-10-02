@@ -223,7 +223,8 @@ namespace NeuralNetwork
         }
         private string Study(int epochCount,string normaliseFuncType)
         {
-            string log = "Epoch; 0 0; 0 1; 1 0; 1 1; \n";
+            //string log = "Epoch; 0 0; value; 0 1; value; 1 0; value; 1 1; value; \n";
+            string log = "Epoch; 0 0;  0 1;  1 0;  1 1;  \n";
             for (int i = 0; i < epochCount; i++)
             {
                 if (i > 150 && i < 152)
@@ -233,13 +234,6 @@ namespace NeuralNetwork
                 log += string.Format("{0} ;", i);
                 for (int iteration = 0; iteration < DataSet.Inputs.Length; iteration++)
                 {
-                    if (iteration == DataSet.Inputs.Length / 4 - 1 ||
-                        iteration == DataSet.Inputs.Length / 4 * 2 - 1 ||
-                        iteration == DataSet.Inputs.Length / 4 * 3 - 1 ||
-                        iteration == DataSet.Inputs.Length - 1)
-                    {
-                        log += string.Format(" {0:0.00000};", CountMSE(iteration));
-                    }
                     SetInputValues(DataSet.Inputs[iteration]);
                     setIdealResultToOutput(DataSet.ExpectedResult[iteration]);
                     //TODO: add enum for this:
@@ -252,6 +246,14 @@ namespace NeuralNetwork
                     {
                         PoolInputsToOutputHyperbola();
                         PushErrorBackHyperbola();
+                    }
+                    if (iteration == DataSet.Inputs.Length / 4 - 1 ||
+                        iteration == DataSet.Inputs.Length / 4 * 2 - 1 ||
+                        iteration == DataSet.Inputs.Length / 4 * 3 - 1 ||
+                        iteration == DataSet.Inputs.Length - 1)
+                    {
+                        //log += string.Format(" {0:0.00000}; {1:0.00};", CountMSE(iteration), Output[0]);
+                        log += string.Format(" {0:0.00000};", CountMSE(iteration));
                     }
                 }
                 log += "\n";

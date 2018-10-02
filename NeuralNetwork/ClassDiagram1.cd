@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="NeuralNetwork.BasicNeuron">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABMAAAAAAAAAAAQAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>BasicNeuron.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NeuralNetwork.HidenNeuron">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QIAAAEAAQAAAAAAAAAAQBACAAAAAIEIAAAAAAAAAAAA=</HashCode>
+      <FileName>HidenNeuron.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NeuralNetwork.Layer">
+    <Position X="0.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Layer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NeuralNetwork.InputNeuron">
+    <Position X="4" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InputNeuron.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NeuralNetwork.NeuralDataSet">
+    <Position X="5.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NeuralDataSet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NeuralNetwork.OutputNeuron">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QIAAAAAAQAAAAAAAAAAABACAQAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>OutputNeuron.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NeuralNetwork.NeuralNetwork">
+    <Position X="2.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gIIAAAEgBAAAQQgBAAAIFAAAAIAAAQACAAAARgQABAA=</HashCode>
+      <FileName>NeuralNetwork.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NeuralNetwork.SideLayerNeuron">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>SideLayerNeuron.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NeuralNetwork.Weight">
+    <Position X="4" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAIAEAAEAAAAAAIAAAgAEAAAAA=</HashCode>
+      <FileName>Weight.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="NeuralNetwork.INeuron">
+    <Position X="0.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABMAAAAAAAAAAAQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>INeuron.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="NeuralNetwork.INeuronCountable">
+    <Position X="5.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAQAAAAAAAAAAABACAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>INeuronCountable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

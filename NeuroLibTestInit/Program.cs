@@ -14,25 +14,26 @@ namespace NeuroLibTestInit
     {
         static void Main(string[] args)
         {
+            int epochcount = 6000;
             /*basic XOR test in few updates
              * O - O \
              *   X    O
              * O - O /
              * */
-            NeuralDataSet dataForLearning = CreateNewData(50);            
-            NeuralNetwork.NeuralNetwork neuralNetwork = new NeuralNetwork.NeuralNetwork(new int[] { 2 }, 2, 1);
+            NeuralDataSet dataForLearning = CreateNewData(1);            
+            NeuralNetwork.NeuralNetwork neuralNetwork = new NeuralNetwork.NeuralNetwork(new int[] { 40 }, 2, 1);
             DateTime time = DateTime.Now;
             neuralNetwork.Initialise();
-            neuralNetwork.StudySpeed = 0.05;
-            neuralNetwork.studyMoment = 0.01;
+            neuralNetwork.StudySpeed = 0.1;
+            neuralNetwork.studyMoment = 0.1;
             neuralNetwork.RandomiseWeights();
             neuralNetwork.SetDataSet(dataForLearning);
 
-            string log = neuralNetwork.StudySigmoid(1000);
+            string log = neuralNetwork.StudyHyperbola(epochcount);
 
             TimeSpan dif = DateTime.Now - time;
 
-            Console.WriteLine("Initialising and studiing for 20 epoches succesful, time spent: {0}", dif.ToString());
+            Console.WriteLine("Initialising and studiing for {1} epoches succesful, time spent: {0}", dif.ToString(),epochcount);
             System.IO.StreamWriter writer = new StreamWriter("C:\\Users\\Aleksandr\\Desktop\\log.csv",false);            
             writer.WriteLine(log);
             writer.Close();
@@ -43,16 +44,16 @@ namespace NeuroLibTestInit
         private static void TestNN(NeuralNetwork.NeuralNetwork neuralNetwork)
         {
             neuralNetwork.SetInputValues(new double[] { 0, 0 });
-            neuralNetwork.PoolInputsToOutputSigmoid();
+            neuralNetwork.PoolInputsToOutputHyperbola();
             Console.WriteLine("input 0,0. Result:{0:0.000}", neuralNetwork.Output[0]);
             neuralNetwork.SetInputValues(new double[] { 0, 1 });
-            neuralNetwork.PoolInputsToOutputSigmoid();
+            neuralNetwork.PoolInputsToOutputHyperbola();
             Console.WriteLine("input 0,1. Result:{0:0.000}", neuralNetwork.Output[0]);
             neuralNetwork.SetInputValues(new double[] { 1, 0 });
-            neuralNetwork.PoolInputsToOutputSigmoid();
+            neuralNetwork.PoolInputsToOutputHyperbola();
             Console.WriteLine("input 1,0. Result:{0:0.000}", neuralNetwork.Output[0]);
             neuralNetwork.SetInputValues(new double[] { 1, 1 });
-            neuralNetwork.PoolInputsToOutputSigmoid();
+            neuralNetwork.PoolInputsToOutputHyperbola();
             Console.WriteLine("input 1,1. Result:{0:0.000}", neuralNetwork.Output[0]);
         }
         static NeuralDataSet CreateNewData(int repitTimes)
@@ -61,13 +62,13 @@ namespace NeuroLibTestInit
             double[] do1 = new double[] { 0 };
 
             Double[] d2 = new double[] { 0, 1 };
-            double[] do2 = new double[] { 0 };
+            double[] do2 = new double[] { 1 };
 
             Double[] d3 = new double[] { 1, 0 };
-            double[] do3 = new double[] { 0 };
+            double[] do3 = new double[] { 1 };
 
             Double[] d4 = new double[] { 1, 1 };
-            double[] do4 = new double[] { 1 };
+            double[] do4 = new double[] { 0 };
             NeuralDataSet data = new NeuralDataSet()
             {
                 Inputs = new double[repitTimes * 4][],
