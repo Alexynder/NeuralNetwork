@@ -221,17 +221,25 @@ namespace NeuralNetwork
         {
             this.DataSet = data;
         }
-        private string Study(int epochCount,string normaliseFuncType)
+        private string Study(int epochCount,string normaliseFuncType, int logPointCount)
         {
-            //string log = "Epoch; 0 0; value; 0 1; value; 1 0; value; 1 1; value; \n";
-            string log = "Epoch; 0 0;  0 1;  1 0;  1 1;  \n";
+            bool loging = false;
+            //forming table header
+            string log = "Epoch;";
+            for (int i = 0; i < DataSet.Inputs.Count(); i++)
+                log += " input"+(i + 1).ToString()+";";
+            log += " \n";
+            int logCounter = 1;
+            if (logPointCount < epochCount)
+                logCounter = epochCount / logPointCount;
+            int LogIndex = 0;
             for (int i = 0; i < epochCount; i++)
             {
-                if (i > 150 && i < 152)
+                if (LogIndex == i)
                 {
-                    Console.WriteLine();
+                    log += string.Format("{0} ;", i);
+                    loging = true;
                 }
-                log += string.Format("{0} ;", i);
                 for (int iteration = 0; iteration < DataSet.Inputs.Length; iteration++)
                 {
                     SetInputValues(DataSet.Inputs[iteration]);
@@ -247,27 +255,29 @@ namespace NeuralNetwork
                         PoolInputsToOutputHyperbola();
                         PushErrorBackHyperbola();
                     }
-                    if (iteration == DataSet.Inputs.Length / 4 - 1 ||
-                        iteration == DataSet.Inputs.Length / 4 * 2 - 1 ||
-                        iteration == DataSet.Inputs.Length / 4 * 3 - 1 ||
-                        iteration == DataSet.Inputs.Length - 1)
+                    //loging data from studying here
+                    if (loging)
                     {
-                        //log += string.Format(" {0:0.00000}; {1:0.00};", CountMSE(iteration), Output[0]);
                         log += string.Format(" {0:0.00000};", CountMSE(iteration));
                     }
                 }
-                log += "\n";
+                if (loging)
+                {
+                    LogIndex += logCounter;
+                    loging = false;
+                    log += "\n";
+                }
             }
             return log;
         }
-        public string StudyHyperbola(int epochCount)
+        public string StudyHyperbola(int epochCount, int logPointCount)
         {
-            string log = Study(epochCount, "hyperbola");
+            string log = Study(epochCount, "hyperbola", logPointCount);
             return log;
         }
-        public string StudySigmoid(int epochCount)
+        public string StudySigmoid(int epochCount, int logPointCount)
         {
-            string log = Study(epochCount, "sigmoid");
+            string log = Study(epochCount, "sigmoid", logPointCount);
             return log;
         }
     }

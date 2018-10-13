@@ -15,6 +15,7 @@ namespace NeuroLibTestInit
         static void Main(string[] args)
         {
             int epochcount = 6000;
+            int logPointC = 4000;
             /*basic XOR test in few updates
              * O - O \
              *   X    O
@@ -29,7 +30,7 @@ namespace NeuroLibTestInit
             neuralNetwork.RandomiseWeights();
             neuralNetwork.SetDataSet(dataForLearning);
 
-            string log = neuralNetwork.StudyHyperbola(epochcount);
+            string log = neuralNetwork.StudyHyperbola(epochcount, logPointC);
 
             TimeSpan dif = DateTime.Now - time;
 
