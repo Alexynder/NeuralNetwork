@@ -20,6 +20,7 @@ namespace NeuralNetwork
         }
         public NeuralDataSet DataSet { get; set; }
         Layer[] layers;
+
         /// <summary>
         /// Basic initialising neural network, before initialising fully use Initialise() method
         /// </summary>
