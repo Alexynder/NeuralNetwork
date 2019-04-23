@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NeuralNetwork
 {
-    abstract class BasicNeuron : INeuron
+    public abstract class BasicNeuron : INeuron
     {
         public double Value { get; set; }
 

@@ -52,6 +52,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Neuron\SideLayerNeuron.cs" />
     <Compile Include="Neuron\Weight.cs" />
+    <Compile Include="ToolsNN\LayerBuilder.cs" />
+    <Compile Include="ToolsNN\WeightTools.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
