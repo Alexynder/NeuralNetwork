@@ -40,18 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BasicNeuron.cs" />
-    <Compile Include="HidenNeuron.cs" />
-    <Compile Include="INeuron.cs" />
-    <Compile Include="INeuronCountable.cs" />
-    <Compile Include="InputNeuron.cs" />
-    <Compile Include="Layer.cs" />
+    <Compile Include="Neuron\BasicNeuron.cs" />
+    <Compile Include="Neuron\HidenNeuron.cs" />
+    <Compile Include="Neuron\INeuron.cs" />
+    <Compile Include="Neuron\INeuronCountable.cs" />
+    <Compile Include="Neuron\InputNeuron.cs" />
+    <Compile Include="Neuron\Layer.cs" />
     <Compile Include="NeuralDataSet.cs" />
-    <Compile Include="NeuralNetwork.cs" />
-    <Compile Include="OutputNeuron.cs" />
+    <Compile Include="ToolsNN\NeuralNetwork.cs" />
+    <Compile Include="Neuron\OutputNeuron.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SideLayerNeuron.cs" />
-    <Compile Include="Weight.cs" />
+    <Compile Include="Neuron\SideLayerNeuron.cs" />
+    <Compile Include="Neuron\Weight.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
